@@ -66,11 +66,11 @@ const images = [
 
 const gallery = document.querySelector(".gallery");
 
-gallery.insertAdjacentHTML("afterbegin", createMarkup());
+gallery.insertAdjacentHTML("afterbegin", createMarkup(images));
 gallery.addEventListener("click", galleryHandler);
 
 function createMarkup(array) {
-  return images
+  return array
     .map(
       (item) => `<li class="gallery-item">
     <a class="gallery-link" href="${item.original}">
@@ -83,7 +83,7 @@ function createMarkup(array) {
 
 function galleryHandler(event) {
   event.preventDefault();
-  if (!event.target.closest(".gallery-image")) {
+  if (event.target.nodeName !== "IMG") {
     return;
   }
   const originalPicture = event.target.dataset.source;
